@@ -57,8 +57,58 @@ header p {
 	color: rgba(255, 255, 255, 0.85);
 }
 
+/* Skip link for keyboard users */
+.skip-link {
+	position: absolute;
+	left: 0.75rem;
+	top: 0.75rem;
+	padding: 0.5rem 0.75rem;
+	background: #ffffff;
+	color: #0b1b2b;
+	border-radius: 6px;
+	text-decoration: none;
+	font-weight: 600;
+	transform: translateY(-200%);
+	transition: transform 0.2s ease;
+	z-index: 10;
+}
+
+.skip-link:focus {
+	transform: translateY(0);
+}
+
+/* Strong focus styles for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.btn:focus-visible,
+.accordion-button:focus-visible,
+#timeline > article:focus-visible {
+	outline: 3px solid rgba(0, 113, 197, 0.7);
+	outline-offset: 3px;
+}
+
+/* Highlights section polish (Bootstrap-first styling) */
+main > section.container:first-of-type .card-body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+main > section.container:first-of-type .card-title .bi {
+	font-size: 1.25rem;
+	margin-inline-end: 0.25rem;
+}
+
+main > section.container:first-of-type .btn {
+	margin-top: auto;
+	align-self: flex-start;
+}
+
 /* Timeline flex container */
-body > section {
+#timeline {
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
@@ -80,25 +130,25 @@ body > section {
 }
 
 /* WebKit scrollbar styling to match the hero colors */
-body > section::-webkit-scrollbar {
+#timeline::-webkit-scrollbar {
 	height: 12px;
 }
 
-body > section::-webkit-scrollbar-track {
+#timeline::-webkit-scrollbar-track {
 	background: #e6f2fb;
 }
 
-body > section::-webkit-scrollbar-thumb {
+#timeline::-webkit-scrollbar-thumb {
 	background: #0071c5;
 	border-radius: 999px;
 }
 
 /* Timeline cards: sizing */
 /* Timeline cards */
-body > section > div {
-	flex: 0 0 calc((100% - (2 * var(--timeline-gap)) - (2 * var(--timeline-padding))) / 3);
-	min-width: calc((100% - (2 * var(--timeline-gap)) - (2 * var(--timeline-padding))) / 3);
-	width: calc((100% - (2 * var(--timeline-gap)) - (2 * var(--timeline-padding))) / 3);
+#timeline > article {
+	flex: 0 0 calc((100% - (2 * var(--timeline-gap))) / 3);
+	min-width: calc((100% - (2 * var(--timeline-gap))) / 3);
+	width: calc((100% - (2 * var(--timeline-gap))) / 3);
 	aspect-ratio: 1 / 1;
 	/* Scroll snap: card snap points */
 	scroll-snap-align: start;
@@ -107,7 +157,7 @@ body > section > div {
 
 /* Timeline cards: base container */
 /* Timeline card base */
-body > section > div {
+#timeline > article {
 	background: var(--card-bg);
 	border: 1px solid rgba(0, 0, 0, 0.06);
 	border-radius: 12px;
@@ -125,7 +175,7 @@ body > section > div {
 }
 
 /* Timeline card typography */
-body > section > div h2 {
+#timeline > article h2 {
 	margin: 0 0 0.25rem;
 	font-size: clamp(0.9rem, 1.2vw, 1.1rem);
 	font-weight: 700;
@@ -133,7 +183,7 @@ body > section > div h2 {
 	color: var(--primary-blue);
 }
 
-body > section > div h3 {
+#timeline > article h3 {
 	margin: 0 0 0.45rem;
 	font-size: clamp(1.05rem, 1.4vw, 1.25rem);
 	font-weight: 700;
@@ -141,7 +191,7 @@ body > section > div h3 {
 }
 
 /* Timeline cards: description overlay */
-body > section > div p {
+#timeline > article p {
 	margin: 0;
 	font-size: clamp(0.9rem, 1.2vw, 1rem);
 	line-height: 1.5;
@@ -157,7 +207,7 @@ body > section > div p {
 	align-items: center;
 	justify-content: flex-start;
 	text-align: left;
-	background: rgba(11, 27, 43, 0.78);
+	background: rgba(11, 27, 43, 0.85);
 	color: #ffffff;
 	border-radius: 8px;
 	padding: clamp(0.25rem, 0.6vw, 0.45rem);
@@ -165,7 +215,7 @@ body > section > div p {
 }
 
 /* Timeline card image sizing */
-body > section > div img {
+#timeline > article img {
 	max-width: 100%;
 	width: calc(100% - 1rem);
 	max-height: none;
@@ -179,33 +229,52 @@ body > section > div img {
 
 /* Timeline cards: hover reveal */
 /* Card detail hidden state */
-body > section > div p {
+#timeline > article p {
 	opacity: 0;
 	transform: translateY(10px);
 	transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 /* Card hover / focus reveal */
-body > section > div img:hover + p,
-body > section > div img:focus + p {
+#timeline > article img:hover + p,
+#timeline > article img:focus + p,
+#timeline > article:focus-within p {
 	opacity: 1;
 	transform: translateY(0);
 }
 
 /* Interaction polish */
-body > section > div {
+#timeline > article {
 	transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-body > section > div:hover,
-body > section > div:focus-within {
+#timeline > article:hover,
+#timeline > article:focus-within {
 	transform: translateY(-4px);
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
 }
 
+/* Visible focus for keyboard users */
+#timeline > article:focus-visible {
+	outline: 3px solid rgba(0, 113, 197, 0.6);
+	outline-offset: 4px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
 /* Responsive mobile layout */
 @media (max-width: 768px) {
-	body > section {
+	#timeline {
 		flex-direction: column;
 		overflow-x: visible;
 		overflow-y: visible;
@@ -214,7 +283,7 @@ body > section > div:focus-within {
 		scroll-snap-type: none;
 	}
 
-	body > section > div {
+	#timeline > article {
 		min-width: 100%;
 		--card-img-height: 55%;
 		--card-title-space: clamp(3.6rem, 7vw, 4.4rem);
@@ -224,7 +293,7 @@ body > section > div:focus-within {
 /* Mobile font and image adjustments */
 
 @media (hover: none) {
-	body > section > div p {
+	#timeline > article p {
 		opacity: 1;
 		transform: none;
 	}
