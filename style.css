@@ -1,0 +1,231 @@
+/* Root variables */
+:root {
+	--intel-blue: #0071c5;
+	--intel-blue-light: #e6f2fb;
+	--ink-900: #0b1b2b;
+	--ink-700: #24384a;
+	--primary-blue: #0071c5;
+	--neutral-bg: #f4f7fb;
+	--card-bg: #ffffff;
+	--text-primary: #0b1b2b;
+	--text-secondary: #3b4b5a;
+	--hero-max-width: 1100px;
+	--hero-pad-block: clamp(3rem, 6vw, 6rem);
+	--hero-pad-inline: clamp(1.25rem, 4vw, 3rem);
+	--hero-gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+/* Header / Hero */
+header {
+	background:
+		radial-gradient(900px 300px at 15% 10%, rgba(255, 255, 255, 0.18), transparent 60%),
+		linear-gradient(180deg, #0071c5 0%, #005fa8 100%);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+header > div {
+	max-width: var(--hero-max-width);
+	margin: 0 auto;
+	padding: var(--hero-pad-block) var(--hero-pad-inline);
+	text-align: center;
+	font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+	color: #ffffff;
+}
+
+/* Logo */
+header img {
+	width: clamp(140px, 20vw, 220px);
+	height: auto;
+	margin: 0 auto var(--hero-gap);
+	display: block;
+}
+
+/* Headline */
+header h1 {
+	margin: 0 0 var(--hero-gap);
+	font-size: clamp(2rem, 4vw, 3.5rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+}
+
+/* Subheading */
+header p {
+	margin: 0;
+	font-size: clamp(1rem, 1.6vw, 1.25rem);
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+/* Timeline flex container */
+body > section {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	--timeline-gap: clamp(1rem, 2.5vw, 1.75rem);
+	--timeline-padding: clamp(1.25rem, 3.5vw, 2.5rem);
+	gap: var(--timeline-gap);
+	padding: var(--timeline-padding);
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	/* Scroll snap: desktop horizontal timeline */
+	scroll-snap-type: x mandatory;
+	scroll-padding-left: var(--timeline-padding);
+	scroll-padding-right: var(--timeline-padding);
+	scroll-behavior: smooth;
+	/* Keep the horizontal scrollbar visible */
+	scrollbar-color: #0071c5 #e6f2fb;
+	scrollbar-width: auto;
+}
+
+/* WebKit scrollbar styling to match the hero colors */
+body > section::-webkit-scrollbar {
+	height: 12px;
+}
+
+body > section::-webkit-scrollbar-track {
+	background: #e6f2fb;
+}
+
+body > section::-webkit-scrollbar-thumb {
+	background: #0071c5;
+	border-radius: 999px;
+}
+
+/* Timeline cards: sizing */
+/* Timeline cards */
+body > section > div {
+	flex: 0 0 calc((100% - (2 * var(--timeline-gap)) - (2 * var(--timeline-padding))) / 3);
+	min-width: calc((100% - (2 * var(--timeline-gap)) - (2 * var(--timeline-padding))) / 3);
+	width: calc((100% - (2 * var(--timeline-gap)) - (2 * var(--timeline-padding))) / 3);
+	aspect-ratio: 1 / 1;
+	/* Scroll snap: card snap points */
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
+}
+
+/* Timeline cards: base container */
+/* Timeline card base */
+body > section > div {
+	background: var(--card-bg);
+	border: 1px solid rgba(0, 0, 0, 0.06);
+	border-radius: 12px;
+	box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+	padding: clamp(0.6rem, 1.4vw, 0.95rem);
+	font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+	/* Keep overlay anchored to each card */
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	--card-img-height: 55%;
+	--card-title-space: clamp(3.4rem, 5.8vw, 4.2rem);
+	color: var(--text-primary);
+}
+
+/* Timeline card typography */
+body > section > div h2 {
+	margin: 0 0 0.25rem;
+	font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: var(--primary-blue);
+}
+
+body > section > div h3 {
+	margin: 0 0 0.45rem;
+	font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+	font-weight: 700;
+	color: var(--text-primary);
+}
+
+/* Timeline cards: description overlay */
+body > section > div p {
+	margin: 0;
+	font-size: clamp(0.9rem, 1.2vw, 1rem);
+	line-height: 1.5;
+	color: var(--text-secondary);
+	/* Hover description sits over the image */
+	position: absolute;
+	left: clamp(0.25rem, 0.6vw, 0.45rem);
+	right: clamp(0.25rem, 0.6vw, 0.45rem);
+	top: auto;
+	bottom: clamp(0.25rem, 0.6vw, 0.45rem);
+	height: auto;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	text-align: left;
+	background: rgba(11, 27, 43, 0.78);
+	color: #ffffff;
+	border-radius: 8px;
+	padding: clamp(0.25rem, 0.6vw, 0.45rem);
+	pointer-events: none;
+}
+
+/* Timeline card image sizing */
+body > section > div img {
+	max-width: 100%;
+	width: calc(100% - 1rem);
+	max-height: none;
+	height: auto;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	border-radius: 8px;
+	margin: 0.5rem;
+	display: block;
+}
+
+/* Timeline cards: hover reveal */
+/* Card detail hidden state */
+body > section > div p {
+	opacity: 0;
+	transform: translateY(10px);
+	transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Card hover / focus reveal */
+body > section > div img:hover + p,
+body > section > div img:focus + p {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Interaction polish */
+body > section > div {
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+body > section > div:hover,
+body > section > div:focus-within {
+	transform: translateY(-4px);
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Responsive mobile layout */
+@media (max-width: 768px) {
+	body > section {
+		flex-direction: column;
+		overflow-x: visible;
+		overflow-y: visible;
+		padding: clamp(1rem, 4vw, 2rem);
+		/* Disable snap on mobile */
+		scroll-snap-type: none;
+	}
+
+	body > section > div {
+		min-width: 100%;
+		--card-img-height: 55%;
+		--card-title-space: clamp(3.6rem, 7vw, 4.4rem);
+	}
+}
+
+/* Mobile font and image adjustments */
+
+@media (hover: none) {
+	body > section > div p {
+		opacity: 1;
+		transform: none;
+	}
+}
